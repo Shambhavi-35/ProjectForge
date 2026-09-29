@@ -1,0 +1,1782 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+        content="ProjectForge helps students with software projects, PPTs, documentation, UI design, research formatting and viva preparation.">
+
+  <meta name="theme-color" content="#09090b">
+
+  <title>ProjectForge — Build. Document. Present.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #09090b;
+      --bg-soft: #111114;
+      --card: #151519;
+      --card-hover: #1b1b21;
+      --text: #f7f7f8;
+      --muted: #a1a1aa;
+      --border: rgba(255,255,255,.09);
+      --accent: #8b5cf6;
+      --accent-2: #06b6d4;
+      --success: #22c55e;
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(139,92,246,.16), transparent 30%),
+        radial-gradient(circle at 90% 10%, rgba(6,182,212,.10), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: auto;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: rgba(9,9,11,.72);
+      border-bottom: 1px solid transparent;
+      transition: .3s;
+    }
+
+    header.scrolled {
+      border-color: var(--border);
+    }
+
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: #c7c7ce;
+      font-size: .92rem;
+      transition: .25s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-btn {
+      padding: 11px 17px;
+      border-radius: 12px;
+      background: white;
+      color: #09090b !important;
+      font-weight: 700;
+    }
+
+    .menu {
+      display: none;
+      background: none;
+      border: 0;
+      color: white;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 0 90px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: #d4d4d8;
+      font-size: .82rem;
+      margin-bottom: 25px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--success);
+    }
+
+    h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3rem, 7vw, 5.7rem);
+      line-height: .98;
+      letter-spacing: -4px;
+      margin-bottom: 25px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(110deg, #fff, #a78bfa, #67e8f9);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 650px;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: .25s;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #09090b;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(255,255,255,.12);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.04);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    /* ================= HERO VISUAL ================= */
+
+    .hero-card {
+      position: relative;
+      min-height: 450px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background:
+        linear-gradient(145deg, rgba(139,92,246,.12), transparent),
+        rgba(255,255,255,.025);
+      padding: 25px;
+      box-shadow: 0 30px 100px rgba(0,0,0,.35);
+    }
+
+    .window {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #0e0e11;
+      overflow: hidden;
+    }
+
+    .window-top {
+      height: 45px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 15px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .window-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #555;
+    }
+
+    .dashboard {
+      padding: 22px;
+    }
+
+    .dashboard-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .mini-card {
+      min-height: 110px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 16px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .mini-icon {
+      font-size: 1.4rem;
+      margin-bottom: 9px;
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-top: 5px;
+    }
+
+    .floating {
+      position: absolute;
+      padding: 15px 18px;
+      border-radius: 17px;
+      border: 1px solid var(--border);
+      background: rgba(20,20,25,.88);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.3);
+    }
+
+    .float-one {
+      left: -35px;
+      bottom: 65px;
+    }
+
+    .float-two {
+      right: -30px;
+      top: 70px;
+    }
+
+    .floating small {
+      color: var(--muted);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    /* ================= SECTIONS ================= */
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-heading {
+      max-width: 680px;
+      margin-bottom: 45px;
+    }
+
+    .eyebrow {
+      color: #a78bfa;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.1rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -1.8px;
+      margin-bottom: 15px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    /* ================= SERVICES ================= */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+    }
+
+    .service {
+      padding: 27px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.025);
+      transition: .3s;
+    }
+
+    .service:hover {
+      transform: translateY(-5px);
+      background: var(--card-hover);
+      border-color: rgba(167,139,250,.35);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(139,92,246,.12);
+      font-size: 1.4rem;
+      margin-bottom: 22px;
+    }
+
+    .service h3 {
+      margin-bottom: 8px;
+    }
+
+    .service p {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    /* ================= PROCESS ================= */
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .step {
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+    }
+
+    .step-number {
+      color: #a78bfa;
+      font-weight: 800;
+      margin-bottom: 13px;
+    }
+
+    .step h3 {
+      margin-bottom: 7px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    /* ================= PRICING ================= */
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .price-card {
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      padding: 30px;
+      background: rgba(255,255,255,.025);
+      position: relative;
+    }
+
+    .price-card.featured {
+      border-color: rgba(167,139,250,.55);
+      box-shadow: 0 25px 70px rgba(139,92,246,.1);
+    }
+
+    .popular {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      font-size: .68rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(139,92,246,.18);
+      color: #c4b5fd;
+    }
+
+    .price-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 2.4rem;
+      margin: 15px 0;
+    }
+
+    .price span {
+      font-family: Inter, sans-serif;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .features {
+      list-style: none;
+      margin: 22px 0;
+    }
+
+    .features li {
+      color: #c9c9d0;
+      padding: 7px 0;
+      font-size: .88rem;
+    }
+
+    .features li::before {
+      content: "✓";
+      color: #86efac;
+      margin-right: 9px;
+    }
+
+    .full {
+      width: 100%;
+    }
+
+    /* ================= PORTFOLIO ================= */
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .project {
+      border: 1px solid var(--border);
+      border-radius: 23px;
+      overflow: hidden;
+      background: rgba(255,255,255,.025);
+      transition: .3s;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-image {
+      height: 210px;
+      display: grid;
+      place-items: center;
+      font-size: 3.5rem;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(139,92,246,.3), transparent 35%),
+        #151519;
+    }
+
+    .project-content {
+      padding: 22px;
+    }
+
+    .project-content p {
+      color: var(--muted);
+      font-size: .86rem;
+      margin: 8px 0 15px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      padding: 5px 9px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: .7rem;
+      color: #c4c4cb;
+    }
+
+    /* ================= TESTIMONIALS ================= */
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .testimonial {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 25px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .stars {
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+
+    .testimonial p {
+      color: #d1d1d6;
+      font-size: .9rem;
+      margin-bottom: 20px;
+    }
+
+    .person {
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    /* ================= FORM ================= */
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 45px;
+      align-items: start;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      margin: 15px 0 25px;
+    }
+
+    .contact-points {
+      list-style: none;
+    }
+
+    .contact-points li {
+      padding: 10px 0;
+      color: #d4d4d8;
+    }
+
+    .form {
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      padding: 28px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    .field.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: .78rem;
+      color: #c7c7ce;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #0e0e11;
+      color: white;
+      border-radius: 12px;
+      padding: 12px 13px;
+      outline: none;
+      transition: .2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(167,139,250,.65);
+      box-shadow: 0 0 0 3px rgba(139,92,246,.08);
+    }
+
+    textarea {
+      min-height: 125px;
+      resize: vertical;
+    }
+
+    /* ================= FAQ ================= */
+
+    .faq {
+      max-width: 800px;
+    }
+
+    details {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+      position: relative;
+      padding-right: 30px;
+    }
+
+    summary::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      font-size: 1.3rem;
+      color: var(--muted);
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    details p {
+      color: var(--muted);
+      padding-top: 12px;
+      font-size: .9rem;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta {
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 55px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(139,92,246,.18), transparent 45%),
+        rgba(255,255,255,.025);
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 25px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 35px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    /* ================= WHATSAPP ================= */
+
+    .whatsapp {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 900;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #25D366;
+      color: white;
+      font-size: 1.45rem;
+      box-shadow: 0 12px 35px rgba(0,0,0,.35);
+      transition: .25s;
+    }
+
+    .whatsapp:hover {
+      transform: scale(1.08);
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 900px) {
+
+      .hero-grid,
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        max-width: 650px;
+        width: 100%;
+        margin: auto;
+      }
+
+      .services-grid,
+      .portfolio-grid,
+      .pricing-grid,
+      .testimonials {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 76px;
+        left: 4%;
+        right: 4%;
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: #111114;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-btn {
+        text-align: center;
+      }
+
+      .menu {
+        display: block;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      section {
+        padding: 75px 0;
+      }
+
+      .hero {
+        padding-top: 125px;
+      }
+
+      h1 {
+        letter-spacing: -2.5px;
+      }
+
+      .services-grid,
+      .portfolio-grid,
+      .pricing-grid,
+      .testimonials,
+      .process,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full-width {
+        grid-column: auto;
+      }
+
+      .hero-card {
+        min-height: 390px;
+        padding: 15px;
+      }
+
+      .float-one {
+        left: 8px;
+        bottom: 25px;
+      }
+
+      .float-two {
+        right: 8px;
+        top: 35px;
+      }
+
+      .cta {
+        padding: 35px 20px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header id="header">
+  <div class="container nav">
+
+    <a href="#home" class="logo">
+      <span class="logo-mark">PF</span>
+      ProjectForge
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#process">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#portfolio">Work</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-btn">Get Started</a>
+    </nav>
+
+    <button class="menu" id="menuBtn" aria-label="Open menu">
+      ☰
+    </button>
+
+  </div>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<main>
+
+<section class="hero" id="home">
+
+  <div class="container hero-grid">
+
+    <div>
+
+      <div class="badge">
+        <span class="dot"></span>
+        Student Technology Services
+      </div>
+
+      <h1>
+        Turn your
+        <span class="gradient-text">idea</span>
+        into something real.
+      </h1>
+
+      <p>
+        Professional support for software projects, presentations,
+        documentation, UI design, portfolios and project demonstrations —
+        all in one place.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#contact" class="btn btn-primary">
+          Start a Project →
+        </a>
+
+        <a href="#services" class="btn btn-secondary">
+          Explore Services
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+      <div class="window">
+
+        <div class="window-top">
+          <span class="window-dot"></span>
+          <span class="window-dot"></span>
+          <span class="window-dot"></span>
+        </div>
+
+        <div class="dashboard">
+
+          <div class="dashboard-title">
+            Your Project Workspace
+          </div>
+
+          <div class="mini-grid">
+
+            <div class="mini-card">
+              <div class="mini-icon">💻</div>
+              <span>Development</span>
+              <strong>Android / Web</strong>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-icon">📊</div>
+              <span>Presentation</span>
+              <strong>Professional PPT</strong>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-icon">📄</div>
+              <span>Documentation</span>
+              <strong>Reports & README</strong>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-icon">🎤</div>
+              <span>Preparation</span>
+              <strong>Demo & Viva</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="floating float-one">
+        <small>Project Status</small>
+        <strong>✓ Ready for Demo</strong>
+      </div>
+
+      <div class="floating float-two">
+        <small>Support</small>
+        <strong>24/7 Request</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= SERVICES ================= -->
+
+<section id="services">
+
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">What we do</div>
+      <h2>Everything you need to present your work professionally.</h2>
+      <p>
+        Choose one service or combine multiple services for your project.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <article class="service">
+        <div class="service-icon">💻</div>
+        <h3>Project Development</h3>
+        <p>
+          Android, web, Python, AI/ML and other software projects with
+          clean architecture and practical guidance.
+        </p>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">📊</div>
+        <h3>PPT Design</h3>
+        <p>
+          Clean and professional presentations designed for project
+          reviews, seminars and demonstrations.
+        </p>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">📄</div>
+        <h3>Documentation</h3>
+        <p>
+          Project reports, README files, diagrams, formatting,
+          proofreading and documentation support.
+        </p>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">🎨</div>
+        <h3>UI/UX Design</h3>
+        <p>
+          Modern mobile and web interfaces with user flows,
+          wireframes and polished visual design.
+        </p>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">🔬</div>
+        <h3>Research Support</h3>
+        <p>
+          Formatting, figures, references, proofreading and
+          presentation support for research work.
+        </p>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">🎤</div>
+        <h3>Viva Preparation</h3>
+        <p>
+          Understand your project with explanations, expected
+          questions and mock demonstration preparation.
+        </p>
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= PROCESS ================= -->
+
+<section id="process">
+
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">Simple process</div>
+      <h2>From requirement to final delivery.</h2>
+      <p>
+        Tell us what you need. We'll discuss the requirements,
+        provide a quote and work with you through delivery.
+      </p>
+    </div>
+
+    <div class="process">
+
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Tell Us</h3>
+        <p>Submit your project requirements through the form.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Get a Quote</h3>
+        <p>We review the requirements and discuss scope and pricing.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Build</h3>
+        <p>Development, design or documentation work begins.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">04</div>
+        <h3>Deliver</h3>
+        <p>Receive the agreed deliverables and project guidance.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= PRICING ================= -->
+
+<section id="pricing">
+
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">Pricing</div>
+      <h2>Start small. Scale when you need more.</h2>
+      <p>
+        Final pricing depends on project complexity, deadline and
+        requirements.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+
+        <h3>Starter</h3>
+
+        <p>For presentations and documentation.</p>
+
+        <div class="price">
+          ₹199 <span>starting</span>
+        </div>
+
+        <ul class="features">
+          <li>PPT design</li>
+          <li>Report formatting</li>
+          <li>Flowcharts</li>
+          <li>Architecture diagrams</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-secondary full">
+          Request Service
+        </a>
+
+      </div>
+
+
+      <div class="price-card featured">
+
+        <span class="popular">POPULAR</span>
+
+        <h3>Project</h3>
+
+        <p>For software project support.</p>
+
+        <div class="price">
+          ₹1,999 <span>starting</span>
+        </div>
+
+        <ul class="features">
+          <li>Project development/support</li>
+          <li>UI design</li>
+          <li>Documentation</li>
+          <li>PPT</li>
+          <li>Demo preparation</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-primary full">
+          Start Project
+        </a>
+
+      </div>
+
+
+      <div class="price-card">
+
+        <h3>Custom</h3>
+
+        <p>For larger or specialized projects.</p>
+
+        <div class="price">
+          Custom
+        </div>
+
+        <ul class="features">
+          <li>Android applications</li>
+          <li>Web applications</li>
+          <li>AI/ML projects</li>
+          <li>Complete documentation</li>
+          <li>Personalized support</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-secondary full">
+          Get a Quote
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= PORTFOLIO ================= -->
+
+<section id="portfolio">
+
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">Selected work</div>
+      <h2>Projects that demonstrate what we can build.</h2>
+      <p>
+        Replace these demo projects with your actual portfolio work.
+      </p>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <article class="project">
+
+        <div class="project-image">
+          📱
+        </div>
+
+        <div class="project-content">
+          <h3>Amara Connect</h3>
+          <p>
+            Digital cement supply and delivery management platform.
+          </p>
+
+          <div class="tags">
+            <span class="tag">Android</span>
+            <span class="tag">Kotlin</span>
+            <span class="tag">Firebase</span>
+          </div>
+        </div>
+
+      </article>
+
+
+      <article class="project">
+
+        <div class="project-image">
+          🌱
+        </div>
+
+        <div class="project-content">
+          <h3>Plant Disease Detection</h3>
+          <p>
+            AI-assisted plant disease identification and agricultural
+            support application.
+          </p>
+
+          <div class="tags">
+            <span class="tag">AI/ML</span>
+            <span class="tag">Python</span>
+            <span class="tag">Mobile</span>
+          </div>
+        </div>
+
+      </article>
+
+
+      <article class="project">
+
+        <div class="project-image">
+          🔤
+        </div>
+
+        <div class="project-content">
+          <h3>Wordaire</h3>
+          <p>
+            Android application focused on an engaging word-learning
+            experience.
+          </p>
+
+          <div class="tags">
+            <span class="tag">Android</span>
+            <span class="tag">Kotlin</span>
+            <span class="tag">Firebase</span>
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= TESTIMONIALS ================= -->
+
+<section>
+
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">Feedback</div>
+      <h2>What clients can say.</h2>
+      <p>
+        Add genuine customer feedback here after completing your first projects.
+      </p>
+    </div>
+
+    <div class="testimonials">
+
+      <article class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>
+          "The presentation was clean, professional and much easier
+          to explain during our review."
+        </p>
+        <div class="person">Student Client · Project Presentation</div>
+      </article>
+
+      <article class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>
+          "The project documentation was organized clearly and
+          helped us understand our own system better."
+        </p>
+        <div class="person">Student Client · Documentation</div>
+      </article>
+
+      <article class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>
+          "The UI was modern and the project demo was much easier
+          to present."
+        </p>
+        <div class="person">Student Client · UI/UX</div>
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact">
+
+  <div class="container contact-wrapper">
+
+    <div class="contact-info">
+
+      <div class="eyebrow">Start a project</div>
+
+      <h2>Tell us what you're building.</h2>
+
+      <p>
+        Submit your requirements and we'll review the project before
+        discussing the scope, timeline and price.
+      </p>
+
+      <ul class="contact-points">
+        <li>⚡ Quick requirement review</li>
+        <li>💬 Clear communication</li>
+        <li>📦 Structured deliverables</li>
+        <li>🎓 Project understanding & demo support</li>
+      </ul>
+
+    </div>
+
+
+    <form class="form" id="projectForm">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label for="name">Full Name *</label>
+          <input id="name" name="name" type="text"
+                 placeholder="Your name" required>
+        </div>
+
+        <div class="field">
+          <label for="phone">WhatsApp Number *</label>
+          <input id="phone" name="phone" type="tel"
+                 placeholder="+91 XXXXX XXXXX" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email"
+                 placeholder="you@example.com">
+        </div>
+
+        <div class="field">
+          <label for="course">Course / Department</label>
+          <input id="course" name="course" type="text"
+                 placeholder="CSE / MCA / BCA...">
+        </div>
+
+        <div class="field full-width">
+          <label for="service">Service Required *</label>
+
+          <select id="service" name="service" required>
+            <option value="">Select a service</option>
+            <option>Project Development</option>
+            <option>PPT Design</option>
+            <option>Documentation</option>
+            <option>UI/UX Design</option>
+            <option>Research Support</option>
+            <option>Viva Preparation</option>
+            <option>Multiple Services</option>
+            <option>Other</option>
+          </select>
+
+        </div>
+
+        <div class="field full-width">
+          <label for="title">Project Title</label>
+          <input id="title" name="title" type="text"
+                 placeholder="Your project title">
+        </div>
+
+        <div class="field">
+          <label for="technology">Technology</label>
+          <input id="technology" name="technology" type="text"
+                 placeholder="Kotlin / React / Python...">
+        </div>
+
+        <div class="field">
+          <label for="deadline">Deadline</label>
+          <input id="deadline" name="deadline" type="date">
+        </div>
+
+        <div class="field">
+          <label for="budget">Budget</label>
+
+          <select id="budget" name="budget">
+            <option value="">Select budget</option>
+            <option>Below ₹500</option>
+            <option>₹500 – ₹2,000</option>
+            <option>₹2,000 – ₹5,000</option>
+            <option>₹5,000 – ₹10,000</option>
+            <option>₹10,000+</option>
+            <option>Not sure</option>
+          </select>
+
+        </div>
+
+        <div class="field full-width">
+
+          <label for="message">
+            Describe your requirement *
+          </label>
+
+          <textarea id="message" name="message"
+                    placeholder="Tell us about your project, requirements, deadline and anything else we should know..."
+                    required></textarea>
+
+        </div>
+
+      </div>
+
+      <button class="btn btn-primary full" type="submit">
+        Submit Project Request →
+      </button>
+
+      <p id="formMessage"
+         style="display:none;color:#86efac;margin-top:15px;font-size:.85rem;">
+      </p>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- ================= FAQ ================= -->
+
+<section id="faq">
+
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">FAQ</div>
+      <h2>Questions, answered.</h2>
+    </div>
+
+    <div class="faq">
+
+      <details>
+        <summary>How do I start a project?</summary>
+        <p>
+          Submit the project request form with your requirements.
+          We'll review it and contact you to discuss the scope,
+          timeline and pricing.
+        </p>
+      </details>
+
+      <details>
+        <summary>Do you work on Android projects?</summary>
+        <p>
+          Yes. Android development can include Kotlin, Firebase,
+          APIs, databases, UI implementation and project guidance.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I request only a PPT or report?</summary>
+        <p>
+          Yes. Individual services such as PPT design, report
+          formatting and diagrams are available.
+        </p>
+      </details>
+
+      <details>
+        <summary>How is the price calculated?</summary>
+        <p>
+          Pricing depends on complexity, scope, deadline and the
+          services requested. You'll receive a quote before work begins.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can you explain the project after delivery?</summary>
+        <p>
+          Yes. Project walkthroughs, documentation explanations
+          and viva preparation can be requested.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I order multiple services?</summary>
+        <p>
+          Yes. You can combine development, UI design, documentation,
+          PPT design and demo preparation into one project package.
+        </p>
+      </details>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section>
+
+  <div class="container">
+
+    <div class="cta">
+
+      <div class="eyebrow">Let's build</div>
+
+      <h2>Your idea deserves a proper presentation.</h2>
+
+      <p>
+        Tell us what you're working on and let's turn your requirements
+        into a clear, professional project.
+      </p>
+
+      <a href="#contact" class="btn btn-primary">
+        Start Your Request →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+  <div class="container footer-inner">
+
+    <div>
+      <a href="#home" class="logo">
+        <span class="logo-mark">PF</span>
+        ProjectForge
+      </a>
+
+      <div class="footer-copy">
+        © 2026 ProjectForge. All rights reserved.
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+      <a href="#faq">FAQ</a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- ================= WHATSAPP ================= -->
+
+<a
+  class="whatsapp"
+  href="https://wa.me/916361059491?text=Hi%20ProjectForge%2C%20I%20want%20to%20discuss%20a%20project."
+  target="_blank"
+  rel="noopener"
+  aria-label="Contact on WhatsApp">
+  ☎
+</a>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+  /* Mobile menu */
+
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+
+  menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+
+
+  /* Close mobile menu after clicking */
+
+  document.querySelectorAll(".nav-links a").forEach(link => {
+
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+    });
+
+  });
+
+
+  /* Navbar background */
+
+  const header = document.getElementById("header");
+
+  window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 20) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+  });
+
+
+  /* Project form */
+
+  const form = document.getElementById("projectForm");
+  const formMessage = document.getElementById("formMessage");
+
+  form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const service = document.getElementById("service").value;
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !phone || !service || !message) {
+      formMessage.style.display = "block";
+      formMessage.style.color = "#fca5a5";
+      formMessage.textContent =
+        "Please fill in all required fields.";
+      return;
+    }
+
+    /*
+      DEMO MODE
+
+      Replace this section with Firebase / Formspree /
+      your own backend when you deploy.
+
+      For now, the request is converted into a WhatsApp message.
+    */
+
+    const email = document.getElementById("email").value;
+    const course = document.getElementById("course").value;
+    const title = document.getElementById("title").value;
+    const technology = document.getElementById("technology").value;
+    const deadline = document.getElementById("deadline").value;
+    const budget = document.getElementById("budget").value;
+
+    const whatsappNumber = "91XXXXXXXXXX";
+
+    const text =
+      `Hello ProjectForge!%0A%0A` +
+      `New Project Request%0A%0A` +
+      `Name: ${name}%0A` +
+      `WhatsApp: ${phone}%0A` +
+      `Email: ${email}%0A` +
+      `Course: ${course}%0A` +
+      `Service: ${service}%0A` +
+      `Project: ${title}%0A` +
+      `Technology: ${technology}%0A` +
+      `Deadline: ${deadline}%0A` +
+      `Budget: ${budget}%0A%0A` +
+      `Requirement:%0A${message}`;
+
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${text}`,
+      "_blank"
+    );
+
+    formMessage.style.display = "block";
+    formMessage.style.color = "#86efac";
+    formMessage.textContent =
+      "Request prepared. WhatsApp will open to send it.";
+
+  });
+
+</script>
+
+</body>
+</html>
